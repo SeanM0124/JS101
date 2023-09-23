@@ -1,4 +1,4 @@
-//How Big is the room?
+//How big is the room?
 
 //Build a program that asks the user to enter the length
 //and width of a room in meters, and then logs the area of
