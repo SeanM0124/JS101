@@ -10,8 +10,8 @@ function invalidNumber(number) { //function for valid numbers/whitespace
   return number.trimStart() === '' || Number.isNaN(Number(number));
 }
 
-function prompt(key, language) {
-  let message = messages(key, language);
+function prompt(language) {
+  let message = messages(language);
   console.log(`=> ${message}`);
 }
 

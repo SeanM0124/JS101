@@ -1,0 +1,11 @@
+{
+  "welcome": "Welcome to the Loan Calculator!\n=> (Your free trial includes 3 calculations.)",
+  "goodbye": "Thank you, come again!",
+  "howMuchLoan": "How much is your loan?",
+  "howMuchApr": "How much is your APR? Example: 2.5 for 2.5%, 5 for 5%.",
+  "howLong": "Please give the length of the loan in years. ",
+  "invalidNum": "Please enter a valid number!",
+  "another": "Would you like to calculate another?",
+  "invalidAns": "Please enter either 'Yes' or 'No'.",
+  "lines": "-------------------------------------------"
+}
