@@ -130,7 +130,7 @@ function validLanguage() {
 }
 
 
-function runProgram() {
+function runCalculator() {
   clearScreen();
   let language = pickAndValidateLanguage();
   prompt('welcome', language);
@@ -154,4 +154,4 @@ function runProgram() {
   }
 }
 
-runProgram();
+runCalculator();
