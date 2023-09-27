@@ -12,10 +12,11 @@
     "num2": "The second number is",
     "operation": "What operation would you like to perform?\n1) Add, 2) Subtract, 3) Multiply, 4) Divide?",
     "invalidOp": "You must choose 1, 2, 3, or 4 if you want to continue.",
-    "output": "The final output of your operation is",
+    "output": "The final output of your operation is: ",
     "again": "Do you want to perform another operation? (y/n)",
     "invalidAns": "That is an invalid answer. Please answer Yes or No.",
-    "goodbye": "Thanks, come again!"
+    "goodbye": "Thanks, come again!",
+    "cannotDivideByZero": "Cannot divide by zero."
   },
   "es": {
     "welcome": "¡Bienvenido a Calculadora!",

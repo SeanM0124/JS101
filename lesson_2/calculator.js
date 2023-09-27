@@ -1,110 +1,132 @@
-const MESSAGES = require('./calculator_messages.json');
 const readline = require('readline-sync');
+const MESSAGES = require('./calculator_messages.json');
+const LANGUAGE = 'en';
 
 
-function messages(message, language = 'begin') {
+function messages(message, language) {
   return MESSAGES[language][message];
 }
 
-function invalidNumber(number) { //function for valid numbers/whitespace
+function prompt(key, result = '') {
+  let message = messages(key, LANGUAGE);
+  console.log(`=> ${message} ${result}`);
+}
+
+function invalidNumber(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number));
 }
 
-function prompt(message) {
-  console.log(`=> ${message}`);
+function getAndCheckFirstNumb() {
+  prompt('firstNumb');
+  let number1 = readline.question();
+
+  while (invalidNumber(number1)) {
+    prompt('invalidNumb');
+    number1 = readline.question();
+  }
+  return number1;
 }
 
+function getAndCheckSecondNumb() {
+  prompt("secondNumb");
+  let number2 = readline.question();
 
-function checkLanguage() {
-  while (!['en', 'es', 'fr', 'de'].includes(language)) {
-    prompt(messages('langError'));
-    language = readline.question();
+  while (invalidNumber(number2)) {
+    prompt('invalidNumb');
+    number2 = readline.question();
   }
-  return MESSAGES[language];
+  return number2;
 }
 
-function chooseLanguage() {
-  prompt(messages('chooseLanguage'));
-  let language = readline.question();
-
-  while (!checkLanguage(language)) {
-    prompt(messages('chooseLanguage'));
-    language = readline.question();
-  }
-  return language;
-}
-
-let language = messages(chooseLanguage());
-checkLanguage(language);
-
-prompt(messages('welcome', language));
-
-while (true) {
-  const language = chooseLanguage();
-  prompt(messages('welcome', language));
-
-  prompt(messages('firstNumb', language)); //ask user for first num
-  let userNumb1 = readline.question();
-
-  while (invalidNumber(userNumb1)) { // for numb1 validation
-    prompt(messages('invalidNumb', language));
-    userNumb1 = readline.question();
-  }
-
-  prompt(messages('num1', language) + userNumb1 + `.`);
-
-  prompt(messages('secondNumb', language)); //ask user for 2nd num
-  let userNumb2 = readline.question();
-
-  while (invalidNumber(userNumb2)) { // for numb2 validation
-    prompt(messages('invalidNumb', language));
-    userNumb2 = readline.question();
-  }
-
-  prompt(messages('num2', language) + userNumb2 + '.');
-
-  prompt(messages('operation', language));
-  //Asks user for operation
-
+function getAndCheckOperation() {
+  prompt('operation');
   let operation = readline.question();
 
-  while (!['1', '2', '3', '4'].includes(operation)) { // operation choice validation
-    prompt(messages('invalidOp', language));
+  while (!['1', '2', '3', '4'].includes(operation)) {
+    prompt('invalidOp');
     operation = readline.question();
   }
+  return operation;
+}
 
-  let output;
+function invalidAnswer(string) {
+  return string.trimStart() === '' || (!['yes', 'no', 'n', 'y'].includes(string));
+}
 
-  //perform the operation on the two numbers
-  switch (operation) {
-    case '1':
-      output = Number(userNumb1) + Number(userNumb2);
-      break;
-    case '2':
-      output = Number(userNumb1) - Number(userNumb2);
-      break;
-    case '3':
-      output = Number(userNumb1) * Number(userNumb2);
-      break;
-    case '4':
-      output = Number(userNumb1) / Number(userNumb2);
-      break;
-  }
-
-  //print the result
-  prompt(messages('output', language) + output + '!');
-
-  prompt(messages('again', language));
+function getAndCheckValidAnswer() {
+  prompt('again');
   let answer = readline.question();
 
-  while (!['y', 'n'].includes(answer)) { //catch non yes or no inputs
-    console.log("Please answer with Yes or No.");
+  while (invalidAnswer(answer)) {
+    prompt('invalidAns');
     answer = readline.question();
   }
+  return answer;
+}
 
-  if (answer[0].toLowerCase() === 'y') {  //again (clear console) or not (end program)
-    console.clear();
-  } else if (answer[0].toLowerCase() === 'n') {
-    break;
+function getResult(number1, number2, operation) {
+  let output;
+  switch (operation) {
+    case '1':
+      output = Number(number1) + Number(number2);
+      break;
+    case '2':
+      output = Number(number1) - Number(number2);
+      break;
+    case '3':
+      output = Number(number1) * Number(number2);
+      break;
+    case '4':
+      output = Number(number1) / Number(number2);
+      break;
+
   }
+  return output;
+}
+
+function dividingByZero(number2, operation) {
+  let isThereZero = false;
+  if ((Math.abs(number2) === 0) && (operation === '4')) {
+    isThereZero = true;
+    return isThereZero;
+  }
+  return isThereZero;
+}
+
+function printFinalResult(result, isThereDivideByZero) {
+  if (isThereDivideByZero === false) {
+    prompt("output", result);
+  } else {
+    prompt('cannotDivideByZero');
+  }
+}
+
+function clearScreen() {
+  console.clear();
+}
+
+function printLines() {
+  console.log('------------------------------');
+}
+
+clearScreen();
+prompt('welcome');
+printLines();
+
+while (true) {
+  let number1 = getAndCheckFirstNumb();
+  let number2 = getAndCheckSecondNumb();
+  let operation = getAndCheckOperation();
+
+  let isThereDivideByZero = dividingByZero(number2, operation);
+  let result = getResult(number1, number2, operation);
+
+  printFinalResult(result, isThereDivideByZero);
+
+  printLines();
+
+  let answer = (getAndCheckValidAnswer().toLowerCase());
+
+  if (!['y', 'yes'].includes(answer)) break;
+  clearScreen();
 }
