@@ -1,6 +1,6 @@
 {
   "begin": {
-    "chooseYourLanguage": "Please choose a language:\n1)English, 2)Spanish, 3)French or 4) German",
+    "chooseYourLanguage": "Please choose a language:\nEnglish (en), Spanish (es), French (fr) or German (de)",
     "langError": "Sorry, we only support the above languages, please choose one of them."
   },
   "en": {
@@ -28,9 +28,10 @@
     "operation": "¿Qué operación te gustaría realizar?\n1) Sumar, 2) Restar, 3) Multiplicar, 4) Dividir?",
     "invalidOp": "Debes elegir 1, 2, 3 o 4 si quieres continuar.",
     "output": "El resultado final de tu operación es",
-    "again": "¿Quieres realizar otra operación? (s/n)",
-    "invalidAns": "Esa es una respuesta inválida. Por favor, responde Sí o No.",
-    "goodbye": "¡Gracias, vuelve pronto!"
+    "again": "¿Quieres realizar otra operación? (y/n)",
+    "invalidAns": "Esa es una respuesta inválida. Por favor, responde 'yes' o 'no'.",
+    "goodbye": "¡Gracias, vuelve pronto!",
+    "cannotDivideByZero": "No se puede dividir por cero."
   },
   "fr": {
     "welcome": "Bienvenue sur Calculatrice!",
@@ -42,9 +43,10 @@
     "operation": "Quelle opération souhaitez-vous effectuer?\n1) Additionner, 2) Soustraire, 3) Multiplier, 4) Diviser?",
     "invalidOp": "Vous devez choisir 1, 2, 3 ou 4 si vous voulez continuer.",
     "output": "Le résultat final de votre opération est",
-    "again": "Voulez-vous effectuer une autre opération ? (o/n)",
-    "invalidAns": "C'est une réponse invalide. Veuillez répondre Oui ou Non.",
-    "goodbye": "Merci, à bientôt !"
+    "again": "Voulez-vous effectuer une autre opération ? (y/n)",
+    "invalidAns": "C'est une réponse invalide. Veuillez répondre 'yes' ou 'no'.",
+    "goodbye": "Merci, à bientôt !",
+    "cannotDivideByZero": "Impossible de diviser par zéro."
   },
   "de": {
     "welcome": "Willkommen beim Rechner!",
@@ -56,8 +58,9 @@
     "operation": "Welche Operation möchtest du durchführen?\n1) Addieren, 2) Subtrahieren, 3) Multiplizieren, 4) Dividieren?",
     "invalidOp": "Du musst 1, 2, 3 oder 4 wählen, um fortzufahren.",
     "output": "Das Endergebnis deiner Operation ist",
-    "again": "Möchtest du eine weitere Operation durchführen? (j/n)",
-    "invalidAns": "Das ist eine ungültige Antwort. Bitte antworte Ja oder Nein.",
-    "goodbye": "Danke, bis bald!"
+    "again": "Möchtest du eine weitere Operation durchführen? (y/n)",
+    "invalidAns": "Das ist eine ungültige Antwort. Bitte antworte 'yes' oder 'no'.",
+    "goodbye": "Danke, bis bald!",
+    "cannotDivideByZero": "Kann nicht durch Null dividiere"
   }
-}
+}  

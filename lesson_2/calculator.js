@@ -1,14 +1,13 @@
 const readline = require('readline-sync');
 const MESSAGES = require('./calculator_messages.json');
-const LANGUAGE = 'en';
 
 
-function messages(message, language) {
-  return MESSAGES[language][message];
+function messages(message, lang = "begin") {
+  return MESSAGES[lang][message];
 }
 
-function prompt(key, result = '') {
-  let message = messages(key, LANGUAGE);
+function prompt(key, language, result = '') {
+  let message = messages(key, language);
   console.log(`=> ${message} ${result}`);
 }
 
@@ -16,34 +15,34 @@ function invalidNumber(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number));
 }
 
-function getAndCheckFirstNumb() {
-  prompt('firstNumb');
+function getAndCheckFirstNumb(language) {
+  prompt('firstNumb', language);
   let number1 = readline.question();
 
   while (invalidNumber(number1)) {
-    prompt('invalidNumb');
+    prompt('invalidNumb', language);
     number1 = readline.question();
   }
   return number1;
 }
 
-function getAndCheckSecondNumb() {
-  prompt("secondNumb");
+function getAndCheckSecondNumb(language) {
+  prompt("secondNumb", language);
   let number2 = readline.question();
 
   while (invalidNumber(number2)) {
-    prompt('invalidNumb');
+    prompt('invalidNumb', language);
     number2 = readline.question();
   }
   return number2;
 }
 
-function getAndCheckOperation() {
-  prompt('operation');
+function getAndCheckOperation(language) {
+  prompt('operation', language);
   let operation = readline.question();
 
   while (!['1', '2', '3', '4'].includes(operation)) {
-    prompt('invalidOp');
+    prompt('invalidOp', language);
     operation = readline.question();
   }
   return operation;
@@ -53,12 +52,12 @@ function invalidAnswer(string) {
   return string.trimStart() === '' || (!['yes', 'no', 'n', 'y'].includes(string));
 }
 
-function getAndCheckValidAnswer() {
-  prompt('again');
+function getAndCheckValidAnswer(language) {
+  prompt('again', language);
   let answer = readline.question();
 
   while (invalidAnswer(answer)) {
-    prompt('invalidAns');
+    prompt('invalidAns', language);
     answer = readline.question();
   }
   return answer;
@@ -93,11 +92,13 @@ function dividingByZero(number2, operation) {
   return isThereZero;
 }
 
-function printFinalResult(result, isThereDivideByZero) {
+function printFinalResult(result, isThereDivideByZero, language) {
   if (isThereDivideByZero === false) {
-    prompt("output", result);
+    prompt("output", language, result);
+    printLines();
   } else {
-    prompt('cannotDivideByZero');
+    prompt('cannotDivideByZero', language);
+    printLines();
   }
 }
 
@@ -109,24 +110,48 @@ function printLines() {
   console.log('------------------------------');
 }
 
-clearScreen();
-prompt('welcome');
-printLines();
+function pickAndValidateLanguage() {
+  prompt('chooseYourLanguage');
+  let language = readline.question().toLowerCase();
 
-while (true) {
-  let number1 = getAndCheckFirstNumb();
-  let number2 = getAndCheckSecondNumb();
-  let operation = getAndCheckOperation();
+  while (invalidLanguage(language)) {
+    language = validLanguage();
+  }
+  return language;
+}
 
-  let isThereDivideByZero = dividingByZero(number2, operation);
-  let result = getResult(number1, number2, operation);
+function invalidLanguage(string) {
+  return !['en', 'es', 'fr', 'de'].includes(string.toLowerCase());
+}
 
-  printFinalResult(result, isThereDivideByZero);
+function validLanguage() {
+  prompt('langError');
+  return readline.question().toLowerCase();
+}
 
+
+function runProgram() {
+  clearScreen();
+  let language = pickAndValidateLanguage();
+  prompt('welcome', language);
   printLines();
 
-  let answer = (getAndCheckValidAnswer().toLowerCase());
+  while (true) {
+    let number1 = getAndCheckFirstNumb(language);
+    let number2 = getAndCheckSecondNumb(language);
+    let operation = getAndCheckOperation(language);
 
-  if (!['y', 'yes'].includes(answer)) break;
-  clearScreen();
+    let isThereDivideByZero = dividingByZero(number2, operation);
+    let result = getResult(number1, number2, operation);
+
+    printFinalResult(result, isThereDivideByZero, language);
+
+    let answer = (getAndCheckValidAnswer(language).toLowerCase());
+
+    if (!['y', 'yes'].includes(answer)) break;
+    prompt('goobye', language);
+    clearScreen();
+  }
 }
+
+runProgram();
