@@ -1,6 +1,7 @@
 const readline = require('readline-sync');
 const MESSAGES = require('./loan_calc_messages.json');
 const TRIALS_ALLOWED = 3;
+const MONTHS_TO_YEAR = 12;
 
 
 function prompt(message) { //messages using .json - monthly payment gives undefined w/o
@@ -67,16 +68,10 @@ function getAndValidateAgain(trialsDone) {
 function clearScreen() {
   console.clear();
 }
-
-// function trialsCounter(trialsDone) {
-//   trialsDone++;
-//   return trialsDone;
-// }
-
 function calculateAndDisplayResult(loanAmount, apr, years) {
-  let monthRate = (Number(apr) / 100) / 12;
+  let monthRate = (Number(apr) / 100) / MONTHS_TO_YEAR;
 
-  let months = Number(years) * 12;
+  let months = Number(years) * MONTHS_TO_YEAR;
 
   let monthPay = Number(loanAmount) *
              (monthRate / (1 - Math.pow((1 + monthRate), (-Number(months)))));
