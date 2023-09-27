@@ -1,56 +1,62 @@
 {
   "begin": {
-    "chooseLanguage": "Please choose a language:\n1)English, 2)Spanish, 3)French or 4) German",
+    "chooseYourLanguage": "Please choose a language:\n1)English, 2)Spanish, 3)French or 4) German",
     "langError": "Sorry, we only support the above languages, please choose one of them."
   },
   "en": {
-    "welcome" : "Welcome to Calculator!",
-    "firstNumb": "Whats the first number?",
-    "num1": "The first Number is ",
-    "invalidNumb": "Uh oh! that doesn't look like a valid number. Please enter a number",
-    "secondNumb": "Whats the second number?",
-    "num2": "The second number is ",
+    "welcome": "Welcome to Calculator!",
+    "firstNumb": "What's the first number?",
+    "num1": "The first number is",
+    "invalidNumb": "Uh oh! That doesn't look like a valid number. Please enter a number.",
+    "secondNumb": "What's the second number?",
+    "num2": "The second number is",
     "operation": "What operation would you like to perform?\n1) Add, 2) Subtract, 3) Multiply, 4) Divide?",
     "invalidOp": "You must choose 1, 2, 3, or 4 if you want to continue.",
-    "output": "The final ouput of your operation is ",
-    "again": "Do you want to perform another operation? (y/n)"
+    "output": "The final output of your operation is",
+    "again": "Do you want to perform another operation? (y/n)",
+    "invalidAns": "That is an invalid answer. Please answer Yes or No.",
+    "goodbye": "Thanks, come again!"
   },
   "es": {
     "welcome": "¡Bienvenido a Calculadora!",
     "firstNumb": "¿Cuál es el primer número?",
-    "num1": "El primer numero es",
-    "invalidNumb": "¡UH oh! Eso no parece un número válido. Por favor, introduzca un número",
+    "num1": "El primer número es",
+    "invalidNumb": "¡UH oh! Eso no parece un número válido. Por favor, introduzca un número.",
     "secondNumb": "¿Cuál es el segundo número?",
-    "num2": "El segundo numero es",
-    "operation": "¿Qué operación te gustaría realizar\n¿Sumar, 2) Restar, 3) Multiplicar, 4) Dividir?",
+    "num2": "El segundo número es",
+    "operation": "¿Qué operación te gustaría realizar?\n1) Sumar, 2) Restar, 3) Multiplicar, 4) Dividir?",
     "invalidOp": "Debes elegir 1, 2, 3 o 4 si quieres continuar.",
-    "output": "El resultado final de su operación es",
-    "again": "Voulez-vous effectuer une autre opération? (y/n)"
+    "output": "El resultado final de tu operación es",
+    "again": "¿Quieres realizar otra operación? (s/n)",
+    "invalidAns": "Esa es una respuesta inválida. Por favor, responde Sí o No.",
+    "goodbye": "¡Gracias, vuelve pronto!"
   },
   "fr": {
     "welcome": "Bienvenue sur Calculatrice!",
-    "firstNumb": "Quel est le premier numéro?",
-    "num1": "Le premier numéro est",
-    "invalidNumb": "Euh oh ! cela ne ressemble pas à un numéro valide. Veuillez entrer un numéro",
-    "secondNumb": "Quel est le deuxième numéro?",
-    "num2": "Le deuxième numéro est",
-    "operation": "Quelle opération souhaiteriez-vous réaliser\nAdditionner, 2) Soustraire, 3) Multiplier, 4) Diviser?",
-    "invalidOp": "Vous devez choisir 1, 2, 3 ou 4 si vous souhaitez continuer.",
+    "firstNumb": "Quel est le premier nombre?",
+    "num1": "Le premier nombre est",
+    "invalidNumb": "Euh oh ! Cela ne ressemble pas à un nombre valide. Veuillez entrer un nombre.",
+    "secondNumb": "Quel est le deuxième nombre?",
+    "num2": "Le deuxième nombre est",
+    "operation": "Quelle opération souhaitez-vous effectuer?\n1) Additionner, 2) Soustraire, 3) Multiplier, 4) Diviser?",
+    "invalidOp": "Vous devez choisir 1, 2, 3 ou 4 si vous voulez continuer.",
     "output": "Le résultat final de votre opération est",
-    "again": "Voulez-vous effectuer une autre opération? (y/n)"
+    "again": "Voulez-vous effectuer une autre opération ? (o/n)",
+    "invalidAns": "C'est une réponse invalide. Veuillez répondre Oui ou Non.",
+    "goodbye": "Merci, à bientôt !"
   },
   "de": {
     "welcome": "Willkommen beim Rechner!",
     "firstNumb": "Was ist die erste Zahl?",
     "num1": "Die erste Zahl ist",
-    "invalidNumb": "Oh oh! das sieht nicht nach einer gültigen Zahl aus. Bitte gebe eine Nummer ein",
+    "invalidNumb": "Oh oh! Das sieht nicht nach einer gültigen Zahl aus. Bitte gib eine Zahl ein.",
     "secondNumb": "Was ist die zweite Zahl?",
     "num2": "Die zweite Zahl ist",
-    "operation": "Welche Operation möchten Sie durchführen?\nAddieren, 2) Subtrahieren, 3) Multiplizieren, 4) Dividieren?",
-    "invalidOp": "Sie müssen 1, 2, 3 oder 4 auswählen, wenn Sie fortfahren möchten.",
-    "output": "Das Endergebnis Ihrer Operation ist",
-    "again": "Möchten Sie eine weitere Operation durchführen? (y/n)"
+    "operation": "Welche Operation möchtest du durchführen?\n1) Addieren, 2) Subtrahieren, 3) Multiplizieren, 4) Dividieren?",
+    "invalidOp": "Du musst 1, 2, 3 oder 4 wählen, um fortzufahren.",
+    "output": "Das Endergebnis deiner Operation ist",
+    "again": "Möchtest du eine weitere Operation durchführen? (j/n)",
+    "invalidAns": "Das ist eine ungültige Antwort. Bitte antworte Ja oder Nein.",
+    "goodbye": "Danke, bis bald!"
   }
-  
-
 }

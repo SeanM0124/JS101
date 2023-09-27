@@ -2,38 +2,47 @@ const MESSAGES = require('./calculator_messages.json');
 const readline = require('readline-sync');
 
 
-function messages(message, lang = 'begin') {
-  return MESSAGES[lang][message];
+function messages(message, language = 'begin') {
+  return MESSAGES[language][message];
 }
 
 function invalidNumber(number) { //function for valid numbers/whitespace
   return number.trimStart() === '' || Number.isNaN(Number(number));
 }
 
-function prompt(language) {
-  let message = messages(language);
+function prompt(message) {
   console.log(`=> ${message}`);
+}
+
+
+function checkLanguage() {
+  while (!['en', 'es', 'fr', 'de'].includes(language)) {
+    prompt(messages('langError'));
+    language = readline.question();
+  }
+  return MESSAGES[language];
 }
 
 function chooseLanguage() {
   prompt(messages('chooseLanguage'));
-  return readline.question();
-}
-function checkLanguage() {
-  let language = chooseLanguage();
+  let language = readline.question();
 
-  while (!['1', '2', '3', '4'].includes(language)) {
-    prompt(messages('langError'));
-    language = ('langError');
+  while (!checkLanguage(language)) {
+    prompt(messages('chooseLanguage'));
+    language = readline.question();
   }
   return language;
 }
 
-let language = chooseLanguage();
+let language = messages(chooseLanguage());
 checkLanguage(language);
+
 prompt(messages('welcome', language));
 
 while (true) {
+  const language = chooseLanguage();
+  prompt(messages('welcome', language));
+
   prompt(messages('firstNumb', language)); //ask user for first num
   let userNumb1 = readline.question();
 
