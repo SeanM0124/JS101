@@ -1,4 +1,4 @@
-//squaring an object
+//squaring an arguement
 
 /*
 Using the multiply() function from the "Multiplying Two Numbers"
