@@ -4,7 +4,7 @@
     "langError": "Sorry, we only support the above languages, please choose one of them."
   },
   "en": {
-    "welcome": "Welcome to Calculator!",
+    "welcome": "Welcome to the Calculator!",
     "firstNumb": "What's the first number?",
     "num1": "The first number is",
     "invalidNumb": "Uh oh! That doesn't look like a valid number. Please enter a number.",
