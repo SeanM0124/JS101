@@ -60,7 +60,7 @@ function getAndCheckValidAnswer(language) {
     prompt('invalidAns', language);
     answer = readline.question();
   }
-  return answer;
+  return ['y', 'yes'].includes(answer);
 }
 
 function getResult(number1, number2, operation) {
@@ -146,11 +146,13 @@ function runCalculator() {
 
     printFinalResult(result, isThereDivideByZero, language);
 
-    let answer = (getAndCheckValidAnswer(language).toLowerCase());
+    // (getAndCheckValidAnswer(language));
 
-    if (!['y', 'yes'].includes(answer)) break;
-    prompt('goobye', language);
-    clearScreen();
+    if (!getAndCheckValidAnswer(language)) {
+      prompt('goobye', language);
+      clearScreen();
+      break;
+    }
   }
 }
 
