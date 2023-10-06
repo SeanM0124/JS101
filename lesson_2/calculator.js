@@ -149,8 +149,8 @@ function runCalculator() {
     // (getAndCheckValidAnswer(language));
 
     if (!getAndCheckValidAnswer(language)) {
-      prompt('goobye', language);
       clearScreen();
+      prompt('goodbye', language);
       break;
     }
   }
