@@ -1,16 +1,14 @@
 const readline = require('readline-sync');
-const VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
-const WINNING_COMBOS = {
-  rock:     ['scissors', 'lizard'],
-  paper:    ['rock',     'spock'],
-  scissors: ['paper',    'lizard'],
-  lizard:   ['paper',    'spock'],
-  spock:    ['rock',     'scissors'],
+const MESSAGES = require('./rps.json');
+const WIN_CONDITION = 3;
+// const VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
+const MOVES = {
+  rock: { abbreviation: 'r', beats: ['scissors', 'lizard']},
+  lizard: { abbreviation: 'l', beats: ['spock,', 'paper']},
+  spock: { abbreviation: 'sp', beats: ['scissors', 'rock']},
+  paper:  { abbreviation: 'p', beats: ['spock', 'rock']},
+  scissors: { abbreviation: 'sc', beats: ['paper', 'lizard']}
 };
-
-let playerScore;
-let computerScore;
-let ties;
 
 function convertCharToChoice() {
   let userChoice = getUserChoice();
@@ -26,67 +24,75 @@ function convertCharToChoice() {
 }
 
 function prompt(message) {
-  console.log(`=> ${message}`);
+  if (Object.keys(MESSAGES).includes(message)) {
+    console.log(`\n=> ${MESSAGES[message]}`);
+  } else {
+    console.log(`=> ${message}`);
+  }
 }
 
 function playerWins(choice, computerChoice) {
-  return WINNING_COMBOS[choice].includes(computerChoice);
+  return MOVES[choice].beats.includes(computerChoice);
+}
+
+function displayChoice(choice, computerChoice) {
+  prompt(`You chose: ${choice}\n=> The computer chose: ${computerChoice}`);
 }
 
 
 function displayWinner(choice, computerChoice) {
   if (playerWins(choice, computerChoice)) {
-    prompt(`You chose: ${choice}\n=> The computer chose: ${computerChoice}`);
-    prompt('You win this round!');
+    displayChoice(choice, computerChoice);
+    prompt('you win');
   } else if (choice === computerChoice) {
-    prompt(`You chose: ${choice}\n=> The computer chose: ${computerChoice}`);
-    prompt("This round is a tie!");
+    displayChoice(choice, computerChoice);
+    prompt("tie");
   } else {
-    prompt(`You chose: ${choice}\n=> The computer chose: ${computerChoice}`);
-    prompt("Computer wins this round!");
+    displayChoice(choice, computerChoice);
+    prompt("you lose");
   }
 }
 
 function getUserChoice() {
-  prompt(`Choose one: ${VALID_CHOICES.join(', ')}.`);
-  let choice = readline.question();
+  prompt(`choice`);
+  let choice = readline.question().toLowerCase();
 
   while (!['r', 'rock', 'p', 'paper', 'l', 'lizard', 'sp', 'spock', 'sc', 'scissors'].includes(choice)) {
-    prompt("That is not a valid choice, try again.");
+    prompt("invalidChoice");
     choice = readline.question();
   }
   clearScreen();
   return choice;
 }
 
-function keepScore(choice, computerChoice) {
+function keepScore(choice, computerChoice, scores) {
   if (playerWins(choice, computerChoice)) {
-    playerScore += 1;
+    scores.player += 1;
   } else if (choice === computerChoice) {
-    ties += 1;
+    scores.ties += 1;
   } else {
-    computerScore += 1;
+    scores.computer += 1;
   }
-  prompt(`Score: ${playerScore} - ${computerScore} (Ties: ${ties})`);
+  prompt(`Score: ${scores.player} - ${scores.computer} (Ties: ${scores.ties})`);
 }
 
-function bestOfFiveCheckAndEnd() {
-  if (playerScore === 3) {
-    prompt('You win the game!');
-    return playerScore;
-  } else if (computerScore === 3) {
-    prompt('You lost..  :(');
-    return computerScore;
+function bestOfFiveCheckAndEnd(scores) {
+  if (scores.player === WIN_CONDITION) {
+    prompt('win game');
+    return scores.player;
+  } else if (scores.computer === WIN_CONDITION) {
+    prompt('lost game');
+    return scores.computer;
   }
   return true;
 }
 
 function userWantsToPlayAgain() {
   printLines();
-  prompt('Do you want to play again (y/n)?');
-  let answer = readline.question().toLowerCase();
+  prompt('play again');
+  let answer = readline.question();
   while (answer[0] !== 'n' && answer[0] !== 'y') {
-    prompt('Please enter "y" or "n".');
+    prompt('invalidAns');
     answer = readline.question().toLowerCase();
   }
   clearScreen();
@@ -94,8 +100,13 @@ function userWantsToPlayAgain() {
 }
 
 function getComupterChoice() {
-  let randomIndex = Math.floor(Math.random() * VALID_CHOICES.length);
-  return VALID_CHOICES[randomIndex];
+  var keys = [];
+  for (let property in MOVES) {
+    if (MOVES.hasOwnProperty(property)) {
+      keys.push(property);
+    }
+  }
+  return (keys[Math.floor(keys.length * Math.random())]);
 }
 
 function clearScreen() {
@@ -106,31 +117,33 @@ function printLines() {
   console.log('+-----------------------------------------------------------+');
 }
 
-function gameRounds() {
-  while (playerScore < 3 && computerScore < 3) {
-    let userChoice = convertCharToChoice();
+function gameRounds(scores) {
+  while (scores.player < WIN_CONDITION && scores.computer < WIN_CONDITION) {
+    let userChoice = convertCharToChoice().toLowerCase();
 
     let computerChoice = getComupterChoice();
 
     displayWinner(userChoice, computerChoice);
-    keepScore(userChoice, computerChoice);
+    keepScore(userChoice, computerChoice, scores);
     printLines();
   }
 }
 
 function gameMainBody() {
   while (true) {
-    playerScore = 0;
-    computerScore = 0;
-    ties = 0;
+    let scores = {
+      player: 0,
+      computer: 0,
+      ties: 0
+    };
 
-    gameRounds();
+    gameRounds(scores);
 
-    bestOfFiveCheckAndEnd();
+    bestOfFiveCheckAndEnd(scores);
 
     if (!userWantsToPlayAgain()) {
       clearScreen();
-      prompt('Thank you for playing!');
+      prompt('Thanks');
       break;
     }
   }
@@ -138,8 +151,9 @@ function gameMainBody() {
 
 function initializeRockPaperScissorsLizardSpock() {
   clearScreen();
-  prompt('Welcome to Rock-Paper-Scissors-Lizard-Spock!');
-  prompt('The first to 3 wins. Good Luck!');
+  prompt('welcome');
+  prompt('gamerules');
+  prompt('win condition');
   printLines();
   gameMainBody();
 }
