@@ -100,12 +100,8 @@ function userWantsToPlayAgain() {
 }
 
 function getComupterChoice() {
-  var keys = [];
-  for (let property in MOVES) {
-    if (MOVES.hasOwnProperty(property)) {
-      keys.push(property);
-    }
-  }
+  let keys = Object.keys(MOVES);
+
   return (keys[Math.floor(keys.length * Math.random())]);
 }
 
@@ -114,7 +110,7 @@ function clearScreen() {
 }
 
 function printLines() {
-  console.log('+-----------------------------------------------------------+');
+  console.log('+----------------------------------------------------------------------------+');
 }
 
 function gameRounds(scores) {
